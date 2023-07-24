@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tailwind Admin Starter Template : Tailwind Toolbox</title>
-    <meta name="author" content="name" />
-    <meta name="description" content="description here" />
-    <meta name="keywords" content="keywords,here" />
+    <title>Dashboard</title>
 
     <link
       rel="stylesheet"
@@ -23,19 +20,15 @@
       rel="stylesheet"
       href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
     />
-    <!--Replace with your tailwind.css once created-->
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" />
-    <!--Totally optional :) -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
       integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis="
       crossorigin="anonymous"
     ></script>
   </head>
-
   <body class="bg-gray-800 font-sans leading-normal tracking-normal">
     <header>
-      <!--Nav-->
       <nav
         aria-label="menu nav"
         class="bg-gray-800 pl-2 pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0"
@@ -46,14 +39,17 @@
               <h1 class="font-bold text-4xl tracking-tight">Dashboard</h1>
             </a>
           </div>
-
-          <button class="btn btn-outline btn-primary btn-sm normal">
-            Logout
-          </button>
+          <form action="@{/logout}" method="post">
+            <button
+              type="submit"
+              class="btn btn-outline btn-primary btn-sm normal"
+            >
+              Cerrar Sesión
+            </button>
+          </form>
         </div>
       </nav>
     </header>
-
     <main>
       <div class="flex flex-col md:flex-row">
         <nav aria-label="alternative nav">
@@ -68,7 +64,7 @@
               >
                 <li class="mr-3 flex-1">
                   <a
-                    href="#"
+                    th:href="@{/tablas}"
                     class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-blue-600"
                   >
                     <i class="fas fa-solid fa-table pr-0 md:pr-3"></i
@@ -80,7 +76,7 @@
                 </li>
                 <li class="mr-3 flex-1">
                   <a
-                    href="#"
+                    th:href="@{/reportes}"
                     class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600"
                   >
                     <i class="fas fa-solid fa-chart-line pr-0 md:pr-3"></i
@@ -92,7 +88,7 @@
                 </li>
                 <li class="mr-3 flex-1">
                   <a
-                    href="#"
+                    th:href="@{/base-datos}"
                     class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-blue-600"
                   >
                     <i class="fas fa-solid fa-database pr-0 md:pr-3"></i
@@ -104,13 +100,13 @@
                 </li>
                 <li class="mr-3 flex-1">
                   <a
-                    href="#"
+                    th:href="@{/configuracion}"
                     class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-blue-600"
                   >
                     <i class="fas fa-solid fa-bars pr-0 md:pr-3"></i
                     ><span
                       class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block"
-                      >Configuracion</span
+                      >Configuración</span
                     >
                   </a>
                 </li>
@@ -130,7 +126,6 @@
                 <h1 class="font-bold pl-2">Reportes</h1>
               </div>
             </div>
-
             <div class="flex flex-wrap">
               <div class="w-full md:w-1/2 xl:w-1/3 p-6">
                 <!--Metric Card-->
@@ -389,11 +384,17 @@
       </div>
     </main>
 
+    
+          </div>
+        </section>
+      </div>
+    </main>
     <script>
       /*Toggle dropdown list*/
       function toggleDD(myDropMenu) {
         document.getElementById(myDropMenu).classList.toggle("invisible");
       }
+
       /*Filter dropdown options*/
       function filterDD(myDropMenu, myDropMenuSearch) {
         var input, filter, ul, li, a, i;
@@ -409,6 +410,7 @@
           }
         }
       }
+
       // Close the dropdown menu if the user clicks outside of it
       window.onclick = function (event) {
         if (
